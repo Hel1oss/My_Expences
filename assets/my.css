@@ -1,0 +1,55 @@
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #666 #222;
+}
+
+.my-custom-style {
+    color: #ffffff;
+    background-color: #30353a;
+}
+.input-style {
+    color: #ffffff;
+    background-color: #353b41;
+    border: 1.1px solid #2b2a33 !important
+}
+.dark-theme .dash-dropdown-content {
+    color: #ffffff;
+    background-color: #353b41;
+    border: 1.1px solid #2b2a33 !important
+}
+
+/*Grid darkl*/
+.my-grid-Dark {
+    scrollbar-width: thin;
+    scrollbar-color: #333131 #222;
+}
+.my-grid-Dark .ag-header-cell
+{
+    color: #81898d;
+    background-color: #171a1d;
+    border: 1.5px solid #1b1f22 !important
+}
+
+.my-grid-Dark .ag-body,
+.my-grid-Dark .ag-cell {
+    color: #7d8488;
+    background-color: #212529;
+    border: 1.1px solid #2b2a33 !important
+}
+.my-grid-Dark .ag-root-wrapper {
+    border: 1px solid #212529 !important;
+    border-radius: 10px !important;
+    background-color: #000000;
+}
+
+.my-grid-Dark .ag-header {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    background-color: #171a1d;
+
+}
+
+/* Grid white*/
+.my-grid-White .ag-header-cell
+{ }
+

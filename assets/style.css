@@ -1,0 +1,10 @@
+
+.trash-btn:hover {
+    background-color: #eb0c0c !important;
+    
+}
+
+/**/
+.trash-btn:hover .trash-logo {
+    filter: brightness(0) invert(1) !important;
+}
