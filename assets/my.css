@@ -49,6 +49,50 @@ html {
 
 }
 
+.my-dropdown {
+    color: #ffffff;
+    background-color: #353b41;
+    border: 1.1px solid #2b2a33 !important
+}
+.my-dropdown .Select-control {
+    background-color: #353b41;
+    border: none;
+    color: #ffffff;
+}
+
+.my-dropdown .Select-value-label {
+    color: #ffffff !important;
+}
+.my-dropdown .Select-input > input {
+    color: #ffffff;
+}
+.my-dropdown .Select-menu-outer {
+    background-color: #353b41;
+    border: 1px solid #2b2a33;
+}
+
+/* each row in the list */
+.my-dropdown .VirtualizedSelectOption {
+    background-color: #353b41;
+    color: #ffffff;
+}
+
+/* hovered / keyboard-focused row */
+.my-dropdown .VirtualizedSelectFocusedOption {
+    background-color: #4a5058;
+}
+
+/* the currently selected row (your purple "All spending") */
+.my-dropdown .VirtualizedSelectSelectedOption {
+    color: #b48eec;
+}
+
+/* dropdown arrow */
+.my-dropdown .Select-arrow {
+    border-color: #ffffff transparent transparent;
+}
+
+
 /* Grid white*/
 .my-grid-White .ag-header-cell
 { }

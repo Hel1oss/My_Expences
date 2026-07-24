@@ -95,8 +95,7 @@ rightLayout = page.Div(
             id='timeline',
             options=Time_line,
             value=Time_line[0],
-            clearable=False,
-            style={"padding": "8px"}
+            clearable=False
         ),
         
         dbc.Fade(
@@ -187,10 +186,9 @@ leftLayout = page.Div([
                     id="category",
                     options=Category,
                     value=Category[0] if Category else None,
-                    clearable=False,
-                    style={"minWidth":"251px",
-                           "height":"38px", 
-                           "marginRight":"2px"}),
+                    style = {"minWidth":"251px","height":"38px", "marginRight":"2px"},
+
+                    clearable=False),
 
                 dbc.Button("Manage category", 
                            id="open-body-scroll", 
@@ -235,6 +233,7 @@ leftLayout = page.Div([
         dag.AgGrid(
             id="List",
             style={"flex": "2"},
+            columnSize= "sizeToFit"
         ),
         id="fade-transition2",
         style={"transition": "opacity 2000ms ease"},

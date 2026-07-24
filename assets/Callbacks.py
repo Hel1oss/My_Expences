@@ -351,16 +351,27 @@ def handling_upload(data):
     Output("offcanvas-backdrop", "className"),
     Output("Balance-input", "className"),
     Output("Balance-grid", "className"),
+    Output("category", "style"),
+    Output("timeline", "style"),
     Input("Dark_state", "children"),
     Input("User_ids", "data")
 )
 def dark_mode(data, ids):
+    dropdown_dark = {
+        "--Dash-Fill-Inverse-Strong": "#353b41",
+        "--Dash-Stroke-Strong": "#2b2a33",
+        "--Dash-Text-Primary": "#ffffff",
+        "--Dash-Fill-Interactive-Strong": "#ffffff",
+    }
+    Category_dropdown = {"minWidth":"251px","height":"38px", "marginRight":"2px"}
+
     if data == "dark":
         return "my-grid-Dark", "my-custom-style", "input-style", "input-style",\
-              "input-style", "input-style", "input-style", "input-style", \
-              "plotly_dark|white", "Light Mode Here", "my-custom-style", "input-style", "my-grid-Dark"
+              "my-dropdown", "my-dropdown", "input-style", "input-style", \
+              "plotly_dark|white", "Light Mode Here", "my-custom-style", "input-style", "my-grid-Dark", \
+              Category_dropdown | dropdown_dark, {"padding": "8px"} | dropdown_dark
     else: 
-        return None, None, None, None, None, None, None, None, "plotly_white|#212529", f"Dark Mode Here", None, None, None
+        return None, None, None, None, None, None, None, None, "plotly_white|#212529", f"Dark Mode Here", None, None, None, Category_dropdown , {"padding": "8px"}
 
 @callback(
     Output("Dark_state", "children"),
