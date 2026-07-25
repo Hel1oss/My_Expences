@@ -1,0 +1,184 @@
+{
+    "expenses": [
+        {
+            "id": 1,
+            "date": "2026-07-04",
+            "category": "Transport",
+            "name": "Bus",
+            "spending": 12000
+        },
+        {
+            "id": 2,
+            "date": "2026-07-04",
+            "category": "Coffee",
+            "name": "Latte",
+            "spending": 35000
+        },
+        {
+            "id": 3,
+            "date": "2026-07-04",
+            "category": "Shopping",
+            "name": "Notebook",
+            "spending": 28000
+        },
+        {
+            "id": 4,
+            "date": "2026-07-01",
+            "category": "Food",
+            "name": "Breakfast",
+            "spending": 25000
+        },
+        {
+            "id": 5,
+            "date": "2026-07-02",
+            "category": "Transport",
+            "name": "Taxi",
+            "spending": 85000
+        },
+        {
+            "id": 6,
+            "date": "2026-07-02",
+            "category": "Bills",
+            "name": "Internet",
+            "spending": 350000
+        },
+        {
+            "id": 7,
+            "date": "2026-07-03",
+            "category": "Entertainment",
+            "name": "Movie",
+            "spending": 75000
+        },
+        {
+            "id": 8,
+            "date": "2026-07-03",
+            "category": "Groceries",
+            "name": "Market",
+            "spending": 180000
+        },
+        {
+            "id": 9,
+            "date": "2026-01-15",
+            "category": "Bills",
+            "name": "Electricity",
+            "spending": 220000
+        },
+        {
+            "id": 10,
+            "date": "2026-02-28",
+            "category": "Health",
+            "name": "Pharmacy",
+            "spending": 65000
+        },
+        {
+            "id": 11,
+            "date": "2026-03-12",
+            "category": "Transport",
+            "name": "Fuel",
+            "spending": 300000
+        },
+        {
+            "id": 12,
+            "date": "2026-03-30",
+            "category": "Shopping",
+            "name": "Clothes",
+            "spending": 450000
+        },
+        {
+            "id": 13,
+            "date": "2026-04-08",
+            "category": "Entertainment",
+            "name": "Games",
+            "spending": 120000
+        },
+        {
+            "id": 14,
+            "date": "2026-05-17",
+            "category": "Bills",
+            "name": "Water",
+            "spending": 90000
+        },
+        {
+            "id": 15,
+            "date": "2026-06-05",
+            "category": "Travel",
+            "name": "Hotel",
+            "spending": 800000
+        },
+        {
+            "id": 16,
+            "date": "2026-07-07",
+            "category": "Coffee",
+            "name": "Matcha",
+            "spending": 25000
+        },
+        {
+            "id": 17,
+            "date": "2026-07-07",
+            "category": "Coffee",
+            "name": "Mochacha",
+            "spending": 35000
+        },
+        {
+            "id": 18,
+            "date": "2026-07-07",
+            "category": "Bills",
+            "name": "Internet mobile",
+            "spending": 50000
+        },
+        {
+            "id": 19,
+            "date": "2026-07-07",
+            "category": "Shopping",
+            "name": "Tokopedia",
+            "spending": 330000
+        },
+        {
+            "id": 20,
+            "date": "2026-07-07",
+            "category": "Groceries",
+            "name": "Indomaret",
+            "spending": 150000
+        },
+        {
+            "id": 21,
+            "date": "2026-07-08",
+            "category": "Food",
+            "name": "kuah",
+            "spending": 20000
+        },
+        {
+            "id": 22,
+            "date": "2026-07-10",
+            "category": "Food",
+            "name": "SEBLACK",
+            "spending": 20000
+        }
+    ],
+    "income": [
+        {
+            "id": 1,
+            "date": "2026-07-25",
+            "name": "Noor",
+            "income": 1000000
+        },
+        {
+            "id": 2,
+            "date": "2026-07-25",
+            "name": "Noor",
+            "income": 1000000
+        },
+        {
+            "id": 3,
+            "date": "2026-07-25",
+            "name": "Noor",
+            "income": 1000000
+        },
+        {
+            "id": 4,
+            "date": "2026-07-25",
+            "name": "Noor",
+            "income": 1000000
+        }
+    ]
+}

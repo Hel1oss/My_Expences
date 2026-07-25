@@ -121,17 +121,27 @@ leftLayout = page.Div([
     
     ],style={"display": "flex", "flexDirection": "row", "gap":"5px"}),
     dbc.Modal([
-        dbc.ModalHeader(dbc.ModalTitle("Add or delete category")),
-        page.Div([ 
-            dcc.Input(
-                id="category2",
-                type="text",
-                placeholder="add more category",
-                debounce=True),
-            dcc.Button("add", id= "btn1")],
-            style={'display': 'flex','flexDirection': 'row', "paddingInline": "20px"}
-            ),
-        page.Div([
+        dbc.ModalHeader(
+            [
+                dbc.ModalTitle("Add or delete category"),
+
+                page.Div(
+                    [
+                        dcc.Input(id="category2", style={"height": "38px"}),
+                        dbc.Button("add", id="btn1")
+                    ],
+                    style={"display": "flex", "gap": "2px"},
+                ),
+            ],
+            close_button=False,
+            style={
+                "display": "flex",
+                "flexDirection": "column",
+                "alignItems": "stretch"
+            }
+        ),
+        
+        dbc.ModalBody([
             itemInList(i, item)
             for i, item in enumerate(Category, start=1)
         ], id="list-container", style = {"padding": "20px"}),
@@ -256,22 +266,29 @@ modal = dbc.Modal(
                     dcc.Upload(
                         dbc.Button("Upload data", style=navbarcol, color='danger'),
                         id="uploadnow",
-                        accept=".csv"),
+                        accept=".json"),
                     dbc.Button("Close", id="close1", className="ms-auto", n_clicks=0),
             ]),
             ],
             id="modal1",
             is_open=False,
         )
-   
+
+download_menu_items = [dbc.DropdownMenuItem("Export json", id='download-btn', style=navbarcol)]
 navbar = dbc.Nav(
             [
                 dbc.NavLink("Upload data", 
                             style=navbarcol, 
                             id='upload-btn'),
-                dbc.NavLink("Download data", 
-                            id='download-btn', 
-                            style=navbarcol),
+                dbc.DropdownMenu(download_menu_items, 
+                                 label="Download", 
+                                 menu_variant="dark",
+                                 style=navbarcol,
+                                 toggle_style={
+                                    "background": "#00000000",
+                                    "border": "1px solid #00000000" ,
+                                }
+                            ),
                 dcc.Download(id="download-df"),
                 dbc.NavLink("Add balance", 
                             id="add-balance",

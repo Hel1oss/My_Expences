@@ -22,31 +22,27 @@ app.title = "My Expence"
 
 
 app.layout = page.Div(
-            ### Refresh when user login with their account by redirect web to self
+  
             [dcc.Location(id="refresh-Login", refresh=True),
-            
-            ### Save dark or light to reuse in darkmode callback
+
             page.Div(id="Dark_state",
                         style={"display": "None"}),
 
-            ### Save login id to activate other callback chain
             dcc.Store(id="User_ids"),
 
-            ### Graph style need string, dark/light|color to change theme automatically base on theme 
             page.Div(id="graph_cable",
                         style={"display": "None"}), 
 
-            ### this was navbar section and hidden modal
             page.Div([  navbar, offcanvas,
                         modal, 
                         modalLogin, modalCreate,
                         dcc.Location(id="url", refresh=True)]
                     ), 
 
-            ### this was left and right layout instanciated 
             page.Div([rightLayout, 
                         leftLayout],
             id = "Main-background",
+            **{"data-theme": "dark"},
             style={
             "display": "flex",
             "flexDirection": "row", 
@@ -64,5 +60,5 @@ app.layout = page.Div(
 
 
 if __name__ == '__main__':
-    app.run(debug=True)    ### test 2
+    app.run(debug=True)   
     

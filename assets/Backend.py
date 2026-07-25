@@ -4,7 +4,9 @@ from datetime import datetime, timedelta
 import csv
 import base64
 import io
-from assets.login_back import load_id, Load_user
+if __name__ != "__main__":
+    from assets.login_back import load_id, Load_user
+import json
 DB = "expenses.db"
 
 def create_table(name):
@@ -189,37 +191,55 @@ def Scrape(time_line="All spending"):
     return rows if rows else [("empty", 0)]
 
 def Download():
-    ids, name = Load_user()
+    user_ids, name = Load_user()
     with sqlite3.connect(DB) as database:
-        df = pd.read_sql_query(
-            f"SELECT * FROM expenses_user_{ids}",
-            database
-        )
-    return df
+        database.row_factory = sqlite3.Row
+        cursor = database.cursor()
+        table_expence = cursor.execute(f"SELECT id, date, category, name, spending FROM expenses_user_{user_ids};").fetchall()
+        table_income = cursor.execute(f"SELECT id, date, name, income FROM balance_user_{user_ids};").fetchall()
+
+    data = {
+        "expenses": [dict(item) for item in table_expence],
+        "income": [dict(item) for item in table_income]
+    }
+
+    json_data  = json.dumps(data, indent=4)
+    return json_data
 
 def Upload(content_string):
+    from contextlib import closing
     ids, name = Load_user()
-    allowed_fields = {"id", "date", "name", "category", "spending"}
 
     file_bytes = base64.b64decode(content_string)
     myfile = io.TextIOWrapper(io.BytesIO(file_bytes), encoding="utf-8")
 
-    read = csv.DictReader(myfile)
+    read = json.load(myfile)
 
     try:
-        if set(read.fieldnames) != allowed_fields:
-            raise ValueError
-
+        for item in read.keys():
+            if item not in {'expenses', 'income'}:
+                raise ValueError
+            else:
+                with closing(sqlite3.connect(DB)) as database:
+                    cursor = database.cursor()
+                    cursor.execute(f"DELETE FROM expenses_user_{ids};")
+                    cursor.execute(f"DELETE FROM balance_user_{ids};")
+                    ExpenceTrack._instances = {}   
+                    database.commit()
+    
         with sqlite3.connect(DB) as database:
             cursor = database.cursor()
-            cursor.execute(f"DELETE FROM expenses_user_{ids};")
-            ExpenceTrack._instances = {}   
-            for item in read:
-
+            for item in read["expenses"]:
                 cursor.execute(
                     f"INSERT INTO expenses_user_{ids} (date, category, name, spending) VALUES (?, ?, ?, ?)",
                     (item["date"], item["category"], item["name"], item["spending"])
                 )
+            for item in read["income"]:
+                cursor.execute(
+                    f"INSERT INTO balance_user_{ids} (date, name, income) VALUES (?, ?, ?)",
+                    (item["date"], item["name"], item["income"])
+                )
+
         with sqlite3.connect(DB) as databased:
             cursor1 = databased.cursor()
             cursor1.execute(
@@ -231,7 +251,7 @@ def Upload(content_string):
 
         return "Success"
 
-    except ValueError:
+    except (json.JSONDecodeError, FileNotFoundError, ValueError, KeyError):
         return "CannotParse"
 
 def rowDeleter(target, id):
@@ -348,8 +368,10 @@ def sumALL() -> tuple[int, int, int]:
 
 
 if __name__ == "__main__":
-    load_table(13)
-    print(ExpenceTrack._instances)
-    print(ExpenceTrack._instances["Food"])
-    print(logFrame("Food", "All spending"))
-    print(sumALL())
+    from login_back import load_id, Load_user
+
+    with open("data.json", "r") as f:
+        read = json.load(f)
+        print(read.keys())
+
+

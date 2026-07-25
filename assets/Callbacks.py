@@ -301,7 +301,7 @@ def toggle_modal2(n1, n2, is_open, ids):
 def download(*args):
     if ctx.triggered_id == "download-btn":
         data = Download()
-        return dcc.send_data_frame(data.to_csv, "YourExpence.csv", index=False)
+        return dict(content=data, filename="Your_data.json")
 
 ### Upload manager -------------------------------------
 @callback(
@@ -353,6 +353,8 @@ def handling_upload(data):
     Output("Balance-grid", "className"),
     Output("category", "style"),
     Output("timeline", "style"),
+    Output("modal-body-scroll", "className"),
+    Output("category2", "className"),
     Input("Dark_state", "children"),
     Input("User_ids", "data")
 )
@@ -369,12 +371,14 @@ def dark_mode(data, ids):
         return "my-grid-Dark", "my-custom-style", "input-style", "input-style",\
               "my-dropdown", "my-dropdown", "input-style", "input-style", \
               "plotly_dark|white", "Light Mode Here", "my-custom-style", "input-style", "my-grid-Dark", \
-              Category_dropdown | dropdown_dark, {"padding": "8px"} | dropdown_dark
+              Category_dropdown | dropdown_dark, {"padding": "8px"} | dropdown_dark, \
+              "my-modal", "input-style"
     else: 
-        return None, None, None, None, None, None, None, None, "plotly_white|#212529", f"Dark Mode Here", None, None, None, Category_dropdown , {"padding": "8px"}
+        return None, None, None, None, None, None, None, None, "plotly_white|#212529", f"Dark Mode Here", None, None, None, Category_dropdown , {"padding": "8px"}, None, None
 
 @callback(
     Output("Dark_state", "children"),
+    Output("Main-background", "data-theme"),
     Input("Dark_mode", "n_clicks"),
     Input("User_ids", "data")
 )
@@ -385,9 +389,9 @@ def state_dark(n_clicks, ids):
         value_return = state()
     
     if value_return%2 == 0:
-        return "dark"
+        return "dark", "dark"
     else:
-        return "light"
+        return "light", "light"
 
 #offcanvas
 @callback(
