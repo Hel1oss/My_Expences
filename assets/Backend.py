@@ -216,17 +216,43 @@ def Upload(content_string):
     read = json.load(myfile)
 
     try:
+        ### im hypervigilant in here so much raise and gatekeep for data integrity
         for item in read.keys():
             if item not in {'expenses', 'income'}:
+                print(f"key doesnt match\n\n{read}")
                 raise ValueError
-            else:
-                with closing(sqlite3.connect(DB)) as database:
-                    cursor = database.cursor()
-                    cursor.execute(f"DELETE FROM expenses_user_{ids};")
-                    cursor.execute(f"DELETE FROM balance_user_{ids};")
-                    ExpenceTrack._instances = {}   
-                    database.commit()
-    
+
+        def key_checker(targets: dict, allowed_key: set) -> bool: 
+            if targets:       
+                allow_list = allowed_key
+
+                for target_item in targets:
+                    check_item = all(n in allow_list for n in target_item)
+                    if not check_item:
+                        print(f"key doesnt match:\n\n{target_item}")
+                        raise ValueError
+
+                return True
+            ## empty return true is intentional, i dont want raise error because the list empty, 
+            # you can import empty table in here
+            return True
+
+        expences = key_checker(read['expenses'], {"id","date","name", "category", "spending"})
+        incomes = key_checker(read['income'], {"id","date","name","income"})
+        
+        ### if im not do this... data will deleted below and error will raise too late
+        if expences and incomes:
+            with closing(sqlite3.connect(DB)) as database:
+                cursor = database.cursor()
+                cursor.execute(f"DELETE FROM expenses_user_{ids};")
+                cursor.execute(f"DELETE FROM balance_user_{ids};")
+                ExpenceTrack._instances = {}   
+                database.commit()
+        else:
+            print(f"error in if else expence:{expences} and Incomes:{incomes} cancelling deletion your data is safe")
+            raise ValueError
+
+
         with sqlite3.connect(DB) as database:
             cursor = database.cursor()
             for item in read["expenses"]:
