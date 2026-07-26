@@ -217,23 +217,24 @@ def Upload(content_string):
 
     try:
         ### im hypervigilant in here so much raise and gatekeep for data integrity
+        allowed_table = {'expenses', 'income'}
         for item in read.keys():
-            if item not in {'expenses', 'income'}:
-                print(f"key doesnt match\n\n{read}")
+            if item not in allowed_table:
+                print(f"key doesnt match: {set(read) - allowed_table}")
                 raise ValueError
 
         def key_checker(targets: dict, allowed_key: set) -> bool: 
             if targets:       
-                allow_list = allowed_key
 
                 for target_item in targets:
-                    check_item = all(n in allow_list for n in target_item)
+                    check_item = all(n in allowed_key for n in target_item)
                     if not check_item:
-                        print(f"key doesnt match:\n\n{target_item}")
+                        print(f"key doesnt match:{set(target_item) - allowed_key}")
                         raise ValueError
 
                 return True
-            ## empty return true is intentional, i dont want raise error because the list empty, 
+            ## empty return true is intentional, 
+            # i dont want raise error because the list empty, 
             # you can import empty table in here
             return True
 
@@ -395,9 +396,7 @@ def sumALL() -> tuple[int, int, int]:
 
 if __name__ == "__main__":
     from login_back import load_id, Load_user
-
-    with open("data.json", "r") as f:
-        read = json.load(f)
-        print(read.keys())
-
+    test_set = {"id","date","name", "category", "spending"}
+    print({"id"} - test_set)
+    
 
