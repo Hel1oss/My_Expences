@@ -227,15 +227,10 @@ def Upload(content_string):
             if targets:       
 
                 for target_item in targets:
-                    check_item = all(n in allowed_key for n in target_item)
-                    if not check_item:
-                        print(f"key doesnt match:{set(target_item) - allowed_key}")
+                    invalid_item = set(target_item) - allowed_key
+                    if invalid_item:
+                        print(f"invalid type item:{list(invalid_item)}")
                         raise ValueError
-
-                return True
-            ## empty return true is intentional, 
-            # i dont want raise error because the list empty, 
-            # you can import empty table in here
             return True
 
         expences = key_checker(read['expenses'], {"id","date","name", "category", "spending"})
@@ -397,6 +392,8 @@ def sumALL() -> tuple[int, int, int]:
 if __name__ == "__main__":
     from login_back import load_id, Load_user
     test_set = {"id","date","name", "category", "spending"}
-    print({"id"} - test_set)
+    comparison = {"id","date","name", "category", "spendings", "nothing"}
+    test = comparison - test_set
+    print(test if test else False)
     
 

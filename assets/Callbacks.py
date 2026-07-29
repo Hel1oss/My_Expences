@@ -355,6 +355,9 @@ def handling_upload(data):
     Output("timeline", "style"),
     Output("modal-body-scroll", "className"),
     Output("category2", "className"),
+    Output("modal-dismiss", "className"),
+    Output("modalCreate", "className"),
+    Output("modal1", "className"),
     Input("Dark_state", "children"),
     Input("User_ids", "data")
 )
@@ -372,9 +375,12 @@ def dark_mode(data, ids):
               "my-dropdown", "my-dropdown", "input-style", "input-style", \
               "plotly_dark|white", "Light Mode Here", "my-custom-style", "input-style", "my-grid-Dark", \
               Category_dropdown | dropdown_dark, {"padding": "8px"} | dropdown_dark, \
-              "my-modal", "input-style"
+              "my-modal", "input-style", "my-modal", "my-modal", "my-modal"
     else: 
-        return None, None, None, None, None, None, None, None, "plotly_white|#212529", f"Dark Mode Here", None, None, None, Category_dropdown , {"padding": "8px"}, None, None
+        return None, None, None, None, None, \
+               None, None, None, "plotly_white|#212529", f"Dark Mode Here", \
+               None, None, None, Category_dropdown , {"padding": "8px"}, \
+               None, None, None, None, None
 
 @callback(
     Output("Dark_state", "children"),
